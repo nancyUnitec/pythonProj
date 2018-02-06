@@ -1,9 +1,52 @@
-from listNode import ListNode
+# from listNode import ListNode
+
+# Definition for singly-linked list.
+class ListNode:
+    def __init__(self, x):
+        self.val = x
+        self.next = None
 
 class Solution:
     def __init__(self, attr1, attr2, attrDefalt = ''):
         self.m_attr1 = attr1
         self.m_attr2 = attr2
+
+    def removeDuplicates(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        j=1
+        for i in range (len(nums)):
+            # print("i = ",i,"j = ",j)
+            if j>=len(nums):
+                # print("first break")
+                break
+
+            if nums[j] == nums[i]:
+                while nums[j] == nums[i]:
+                    j += 1
+                    # print("j = ",j)
+                
+                    if j>=len(nums):
+                        # print("second break")
+                        break
+
+                # print("assign to num[i+1]")
+                nums[i+1] = nums[j]
+
+            j += 1
+
+        # print("last i = ",i)
+        # print(nums)
+        # print("finally")
+
+        res = []
+        for index in range (0,i+1):
+            # print("index = ",index)
+            res.append(nums[index])
+        print(res)
+        return res
         
     def isMatch(self, text, pattern):
         if not pattern:
@@ -101,7 +144,50 @@ class Solution:
         for i in range(index, len(nums)):
             self.dfs(nums, target-nums[i], i, path+[nums[i]], res)
 
-    def removeNthFromEnd(self, head, n):
+    def addTwoNumbers(self, l1, l2):
+        """
+        :type l1: ListNode
+        :type l2: ListNode
+        :rtype: ListNode
+        """
+        carry = 0
+        head = l1
+        last = l1
+        linked = 0
+        while l1 or l2:
+            if l1:
+                sum1 = l1.val
+            else:
+                sum1 = 0
+            if l2:
+                sum2 = l2.val
+            else:
+                sum2 = 0
+            sum = sum1 + sum2 + carry
+            carry = 0
+            if sum>=10:
+                carry = 1
+            res = sum % 10
+            if l1:
+                l1.val = res
+                last = l1
+                l1 = l1.next
+                if l2:
+                    l2 = l2.next
+            else:
+                l2.val = res
+                if not linked:
+                    last.next = l2
+                    linked = 1
+                last = l2
+                l2 = l2.next
+                
+        if carry > 0:
+            newNode = ListNode(carry)
+            last.next = newNode
+        return head
+
+    # def removeNthFromEnd(self, head, n):
         # """
         # :type head: ListNode
         # :type n: int

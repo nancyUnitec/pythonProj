@@ -4,19 +4,18 @@
 
 # @author: PCTech
 from leetcodeSolution import Solution
-
-# Definition for singly-linked list.
-# class ListNode:
-#     def __init__(self, x):
-#         self.val = x
-#         self.next = None
+from leetcodeSolution import ListNode
 
 ltcd = Solution("attr1","attr2")
 ltcd.myDbg()
-candidates = [1,3,5]
-target = 4
-res = ltcd.combinationSum(candidates, target)
-print(res)
+# candidates = [1,3,5]
+# target = 4
+# res = ltcd.combinationSum(candidates, target)
+# print(res)
+
+nums = [2,2,3,3,4]
+# nums = [1,1,2]
+ltcd.removeDuplicates(nums)
 
 # s = "odd"
 # t = "egg"
