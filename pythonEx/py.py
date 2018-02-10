@@ -1,4 +1,87 @@
 
+
+################import datastore from csv######################
+
+import logging
+import hashlib
+
+import csv
+
+def generate_hash(rate_code):
+    hash_object = hashlib.sha256(rate_code.encode())
+    return hash_object.hexdigest()
+
+def create_rates(merchant_id, merchant_name, merchant_rates_file_name):
+    """create rates for a merchant form a CSV file"""
+    csvFile = open(merchant_rates_file_name, "r")
+
+    reader = csv.reader(csvFile)
+    data = []
+
+    id_col = 0
+    country_col = 1
+    type_col = 2
+    desc_col = 3
+    period_months_col = 4
+    price_from_col = 5
+    price_to_col = 6
+    cost_col = 7
+    currency_col = 8
+
+    count = 0
+    for item in reader:
+        count += 1
+        # if count > 10:
+        #     break
+        if count > 1:
+            rate_code = item[id_col]
+            hash_code = generate_hash(rate_code)
+
+            key = CLIENT.key('rate', hash_code,
+                             namespace=GCP_DATASTORE_NAMESPACE)
+            entity = datastore.Entity(key=key, exclude_from_indexes=[])
+
+            country_code = 'AU'
+            if item[country_col] == 'Canada':
+                country_code = 'CA'
+            elif item[country_col] == 'Australia':
+                country_code = 'AU'
+            else:
+                country_code = 'UNKNOWN'
+            print(country_code)
+
+            warraty_type = 'INTERNATIONAL_WARRANTY'
+            if item[type_col] != 'LC_EW':
+                warraty_type = 'UNKNOWN'
+            print(warraty_type)
+
+            LOG.debug('Loading: %s, %s, %s, %d -> rate_code %s', merchant_name, country_code, warraty_type, count, rate_code)
+
+            entity.update({
+                'id': hash_code,
+                'code': rate_code,
+                'merchant_id': merchant_id,
+                'merchant_name': merchant_name,
+                'description': item[desc_col],
+                'country_code': country_code,
+                'type': warraty_type,
+                'period_months': int(item[period_months_col]),
+                'price_from': float(item[price_from_col].replace(',', '')),
+                'price_to': float(item[price_to_col].replace(',', '')),
+                'fee': float(item[cost_col].replace(',', '')),
+                'fee_currency': item[currency_col],
+                'fee_tax': float(0.0),
+                'fee_tax_currency': item[currency_col],
+                'price_currency': item[currency_col],
+            })
+            CLIENT.put(entity)
+
+    csvFile.close()
+
+    return
+
+
+
 ####################create sql from csf file#######################################
 #file_object = open("moviestest.txt","r")
 file_object = open("toParse/course_books_Jeffrey_p.csv","r")
@@ -6,7 +89,7 @@ file_object = open("toParse/course_books_Jeffrey_p.csv","r")
 path_out = 'result0923.txt'
 
 file_out = open(path_out,'w')
-lines = file_object.readlines()
+lines = file_object.readlines()  //sb method
 
 for line in lines:
         x = line.split(',')
@@ -98,7 +181,7 @@ session.execute("insert into users(id, name) values(2, 'Zhang zhipeng');")
 import pycassa
 import time
 batch_size = 100
-con = pycassa.ConnectionPool('History',server_list=["127.0.0.1:9042"]
+conï¿½=ï¿½pycassa.ConnectionPool('History',server_list=["127.0.0.1:9042"]
 cf = pycassa.ColumnFamily(con,cfName)
 cf.insert('row_key',{'col_name':'col_val'})
 
