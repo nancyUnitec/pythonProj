@@ -193,6 +193,27 @@ class Solution:
         # :type n: int
         # :rtype: ListNode
         # """
+        if not head:
+            return None
+        if not head.next:
+            return None
+        slow = head
+        fast = head
+        for i in range (n):
+            fast = fast.next
+        if not fast:
+            return head.next
+        while fast.next:
+            fast = fast.next
+            #last = slow
+            slow = slow.next
+        slow.next = slow.next.next
+        
+        return head
+
 
     def myDbg(self):
         print("I love python")
+        pattern ="zhangyixin"
+        print(pattern[3:])
+        print(pattern[3])
