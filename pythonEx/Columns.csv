@@ -1,1 +1,4 @@
-lex0_19.csv,FL436,FL439,FL406,FL433,FL413,FL345,FL021,FL187,FL392,FL519,FL520,PID
+bmi.csv,BMI8
+vr_diab_ex28_0_0601d.csv,BLS8,DMRx8,BG140_curr_diab8,BG140_hx_diab8
+vr_survcvd1_2011_m_0785d.csv,cvd,cvddate
+vr_dates_2014_a_0912d.csv,sex,att7,date7,age7,site7
