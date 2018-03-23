@@ -26,10 +26,11 @@ def file_name(file_dir):
     for index, column in enumerate(columns):
         print(index, column) 
         col_names.append(column)
+    
 
     print("\n csv files number is ",len(files))
     for i in range (len(files)):
-        print("\n ",i ,files[i]) 
+        # print("\n ",i ,files[i]) 
         file_out.write(" -----------------------------------------------------------------\n ")
         file_out.write(files[i]+" :\n ")
         # searchInCsvFile(csvFile,column,target)
@@ -40,6 +41,7 @@ def file_name(file_dir):
 
 def getPIDArray():
     fileName = "PID.csv"
+    # fileName = 'py.py'
     csvFile = open(fileName, "r") 
     reader = csv.reader(csvFile)
     # data = []
@@ -72,11 +74,15 @@ def getColumns():
 
 # def searchInCsvFile(csvFile,column,target):
 def searchInCsvFile(file, targetPID, columns ,col_names):
-    print("\n enter searchInCsvFile ")
+    # print("\n enter searchInCsvFile targetPID = ",targetPID)
+    # print("\n enter searchInCsvFile columns = ",columns)
+    # print("\n enter searchInCsvFile col_names = ",col_names)
+    
     if not file in col_names:
-        print("\n file is not concerned ")
+        # print("\n file is not concerned ")
         return
     path_out = "res/"+file+'_res.csv'
+    print("\n handling ",path_out)
     # path_out = file+'_res.csv'
     outputFile = open(path_out,'w')
     for col in columns[file]:
@@ -100,7 +106,7 @@ def searchInCsvFile(file, targetPID, columns ,col_names):
                     pid_col = i
         
         elif count>1:
-            if pid_col>0:
+            if pid_col>=0:
                 if item[pid_col] in targetPID:
                     value = {}
                     for index in range (col_num): 
