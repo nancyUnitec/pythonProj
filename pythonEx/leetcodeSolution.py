@@ -11,6 +11,42 @@ class Solution:
         self.m_attr1 = attr1
         self.m_attr2 = attr2
 
+    def generateParenthesis(self, n):
+        """
+        :type n: int
+        :rtype: List[str]
+        """
+
+        def createOneSolution(A = []):  #embeded function, no need to write "self"
+            if len(A) == 2*n:
+              if isValid(A):
+                # add A to solution set
+                ans.append("".join(A))
+            else:
+                A.append('(')
+                createOneSolution(A)
+                A.pop()
+                A.append(')')
+                createOneSolution(A)
+                A.pop()
+        
+        def isValid(S):
+            sum = 0
+            for item in S:
+                if item == '(':
+                    sum +=1
+                else:
+                    sum -=1
+                if sum<0:
+                    return False
+            if sum == 0:
+                return True
+
+        ans = []
+        createOneSolution()
+
+        return ans
+
     def removeDuplicates(self, nums):
         """
         :type nums: List[int]

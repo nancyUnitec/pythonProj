@@ -13,9 +13,9 @@ ltcd.myDbg()
 # res = ltcd.combinationSum(candidates, target)
 # print(res)
 
-nums = [2,2,3,3,4]
+# nums = [2,2,3,3,4]
 # nums = [1,1,2]
-ltcd.removeDuplicates(nums)
+# ltcd.removeDuplicates(nums)
 
 # s = "odd"
 # t = "egg"
@@ -23,9 +23,14 @@ ltcd.removeDuplicates(nums)
 
 # print(3+2)
 
-    
-        
+    # def generateParenthesis(self, n):
 
+ans = ltcd.generateParenthesis(3)
+# print(ans)
 
+seq1 = ['hello','good','boy','doiido']
+str_output1 = ' '.join(seq1)    #hello good boy doiido
+str_output2 = ':'.join(seq1)    #hello:good:boy:doiido
 
-        
+print(str_output1)
+print(str_output2)
