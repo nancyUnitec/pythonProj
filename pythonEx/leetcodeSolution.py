@@ -148,6 +148,32 @@ class Solution:
 
         return True
 
+    # without recursion, this function can only generate one solution, no ok
+    def mySolveNQueens(self, n):
+        """
+        :type n: int
+        :rtype: List[List[str]]
+        """
+        
+        p = []
+        summ = []
+        diff = []
+        for i in range (n):
+            for j in range (n):
+                if (j not in p) and ((j+i) not in summ) and ((j-i) not in diff):
+                    p.append(j)
+                    summ.append(j+i)
+                    diff.append(j-i)
+        
+        # for(j=1..n)
+        output = []
+        for i in range (n):
+            str = '.'*(p[i])+'Q'+'.'*(n-p[i]-1)
+            # str[p[i]] = 'Q'
+            output.append(str)
+        
+        return output
+
     def longestCommonPrefix(self, strs):
         if not strs:
             return ""

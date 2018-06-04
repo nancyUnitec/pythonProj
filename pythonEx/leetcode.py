@@ -34,3 +34,13 @@ str_output2 = ':'.join(seq1)    #hello:good:boy:doiido
 
 print(str_output1)
 print(str_output2)
+
+# def mySolveNQueens(self, n):
+ans = ltcd.mySolveNQueens(8)
+# print(ans)
+
+ans = '.'*2+'Q'+'$'*3
+print(ans)
+
+
+
