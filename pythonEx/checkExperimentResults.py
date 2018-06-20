@@ -1,24 +1,92 @@
 
 def caculateAfterSingleConditions():
-    fee_uw = {}
+    sales = {}
+
+    # sales["all_21"] = ???
+    sales["rate_period_36"] = {}
+    sales["rate_period_36"]["sm1"] = 4086
+
+    # step 1:
+    # add mp3_25 100
+    # old_fee_uw["sm25"] += 100*sales["mp3_25"]   #169929.5   ok
+    # fee_uw["rate_period_36"]["sm1"] = fee_uw["rate_period_36"]["sm1"]+100.0*sales["rate_period_36"]["sm1"]
     
-    # # step 1:
-    # # add mp3_25 100
-    # fee_uw["all_25"] += 100*sales["mp3_25"]   #169929.5   ok
-    # # fee_uw["rate_period_36"]["sm1"] = fee_uw["rate_period_36"]["sm1"]+100.0*sales["rate_period_36"]["sm1"]
-    # fee_uw["rate_period_36"]["sm1"] += 100.0*sales["rate_period_36"]["sm1"]
+    #add all product in sm1 by 100
+    old_fee_uw = {}
+    old_fee_uw["rate_period_36"] = {}    
+    temp = 100.0*(sales["rate_period_36"]["sm1"])
+    old_fee_uw["rate_period_36"]["sm1"] = 24467.25
+    # new_fee_uw["rate_period_36"]["sm1"] += temp
 
-
+    old_lr_uw = {}
+    new_fee_uw = {}
+    new_lr_uw = {}
+    new_lr_uw["sm1"] = {}
     # # new_lr_uw for each cm is: old_lr_uw/(1+(delta_fee*sales/old_fee_uw))
-    # old_lr_uw = {}
     # old_lr_uw["sm25"] = {}
-    # old_lr_uw["sm1"] = {}
+    old_lr_uw["sm1"] = {}
     # old_lr_uw["rate_period_36"] = {}
     # old_lr_uw["sm25"]["cm2"] = 101.12
-    # old_lr_uw["sm1"]["cm1"] = 139.25
+    old_lr_uw["sm1"]["cm14"] = 127.59
+    new_lr_uw["sm1"]["cm14"] = old_lr_uw["sm1"]["cm14"]/(1+(100*sales["rate_period_36"]["sm1"]/old_fee_uw["rate_period_36"]["sm1"]))
+    print("new_lr_uw = ",new_lr_uw["sm1"]["cm14"])
 
-def caculateAfterMultipleConditions():
-    
+def caculateAfterSingleConditions_1():
+    # block the center product
+    if True:
+
+        # distribution data
+        cfd = {}
+        cfd["cm19"] = 0.23726374699999997
+
+        # cover data
+        old_fee_uw = {}
+        sales = {}
+        fee_uw = {}
+        new_fee_uw = {}
+
+        sales["rate_period_36"] = {}
+        sales["rate_period_36"]["sm1"] = 4086
+
+        fee_uw["center"] = {}
+        fee_uw["center"]["sm11"] = 2403
+
+        fee_uw["all_1"] = 24467
+
+        fee_uw["rate_period_36"] = {}
+        fee_uw["rate_period_36"]["sm1"] = 24467
+
+        old_fee_uw["sm11"] = 38327.25
+        # print("new_fee_uw_sm11",new_fee_uw["sm11"])
+
+        #claim data
+        claim_cost = {}
+        claim_cost["center"] = {}
+        claim_cost["center"]["sm11"] = {}
+        # claim_cost["center"]["sm11"]["cm19"] = 213.19
+        claim_cost["center"]["sm11"]["cm19"] = 202.62
+        # claim_cost["center"]["sm11"]["cm19"] = 415.81
+        
+        old_claim_cost = {}
+        old_claim_cost["sm11"] = {}
+        old_claim_cost["sm11"]["cm19"] = 7500.0
+        new_claim_cost = {}
+        new_claim_cost["sm11"] = old_claim_cost["sm11"]["cm19"]-claim_cost["center"]["sm11"]["cm19"]
+        # print("new_claim_cost_sm11 = ",new_claim_cost["sm11"])
+
+    # mp3,200,DVD,200 add 5 and 10 respectively
+    # center,200 and GPS 700 block
+    new_fee_uw["sm11"] = old_fee_uw["sm11"]- fee_uw["center"]["sm11"]
+    old_lr_uw = old_claim_cost["sm11"]["cm19"]/(old_fee_uw["sm11"]*cfd["cm19"])
+    new_lr_uw = new_claim_cost["sm11"]/(new_fee_uw["sm11"]*cfd["cm19"])
+
+    print("444444 old_lr_uwwwwwwww = ",old_lr_uw)
+    print("444444 new_lr_uwwwwwwww = ",new_lr_uw)
+
+def caculateAfterMultipleConditions_0():
+    # mp3,200,DVD,200 add 5 and 10 respectively
+    # center,200 and GPS 700 block
+
     if True:
 
         # distribution data
@@ -68,7 +136,7 @@ def caculateAfterMultipleConditions():
         claim_cost = {}
         claim_cost["center_200"] = {}
         claim_cost["center_200"]["sm11"] = {}
-        claim_cost["center_200"]["sm11"]["cm19"] = 213.19
+        claim_cost["center_200"]["sm11"]["cm19"] = 202.62
         claim_cost["gps_700"] = {}
         claim_cost["gps_700"]["sm11"] = {}
         claim_cost["gps_700"]["sm11"]["cm19"] = 0.0
@@ -83,6 +151,79 @@ def caculateAfterMultipleConditions():
     # mp3,200,DVD,200 add 5 and 10 respectively
     # center,200 and GPS 700 block
     new_fee_uw["sm11"] = old_fee_uw["sm11"]+sales["mp3_200"]["sm11"]*5.0+sales["dvd_200"]["sm11"]*10.0 - fee_uw["center_200"]["sm11"] - fee_uw["gps_700"]["sm11"]
+    old_lr_uw = old_claim_cost["sm11"]["cm19"]/(old_fee_uw["sm11"]*cfd["cm19"])
+    new_lr_uw = new_claim_cost["sm11"]/(new_fee_uw["sm11"]*cfd["cm19"])
+
+    print("old_lr_uwwwwwwww = ",old_lr_uw)
+    print("new_lr_uwwwwwwww = ",new_lr_uw)
+
+def caculateAfterMultipleConditions_1():
+    # mp3 all price,DVD all price add 5 and 10 respectively
+    # center,200 and GPS 700 block
+
+    if True:
+
+        # distribution data
+        cfd = {}
+        cfd["cm19"] = 0.23726374699999997
+
+        # cover data
+        old_fee_uw = {}
+        sales = {}
+        fee_uw = {}
+        new_fee_uw = {}
+
+        # sales["all_21"] = 7712
+        sales["rate_period_36"] = {}
+        sales["rate_period_36"]["sm1"] = 4086
+
+        sales["mp3"] = {}
+        sales["mp3"]["sm11"] = 70
+        sales["dvd"] = {}
+        sales["dvd"]["sm11"] = 457
+
+        # sales["dvd_22"] = 65
+        # sales["dvd_25"] = 42
+
+        # sales["gps_21"] = 405
+        # sales["center_22"] = 664
+
+        # fee_uw["mp3_25"] = 8460
+
+        fee_uw["center"] = {}
+        fee_uw["center"]["sm11"] = 2403.75
+        fee_uw["gps"] = {}
+        fee_uw["gps"]["sm11"] = 273.75
+
+        # fee_uw["all_1"] = 24467
+
+        # fee_uw["all_22"] = 51791.25
+        # fee_uw["all_25"] = 89429.5
+        fee_uw["rate_period_36"] = {}
+        fee_uw["rate_period_36"]["sm1"] = 24467
+
+        old_fee_uw["sm11"] = 38327.25
+        # print("new_fee_uw_sm11",new_fee_uw["sm11"])
+
+        #claim data
+        claim_cost = {}
+        claim_cost["center"] = {}
+        claim_cost["center"]["sm11"] = {}
+        claim_cost["center"]["sm11"]["cm19"] = 202.62
+        claim_cost["gps"] = {}
+        claim_cost["gps"]["sm11"] = {}
+        claim_cost["gps"]["sm11"]["cm19"] = 0
+
+        old_claim_cost = {}
+        old_claim_cost["sm11"] = {}
+        old_claim_cost["sm11"]["cm19"] = 7500.0
+        new_claim_cost = {}
+        new_claim_cost["sm11"] = old_claim_cost["sm11"]["cm19"]-claim_cost["center"]["sm11"]["cm19"] - claim_cost["gps"]["sm11"]["cm19"]
+        # print("new_claim_cost_sm11 = ",new_claim_cost["sm11"])
+
+    # mp3,200,DVD,200 add 5 and 10 respectively
+    # center,200 and GPS 700 block
+    new_fee_uw["sm11"] = old_fee_uw["sm11"]+sales["mp3"]["sm11"]*5.0+sales["dvd"]["sm11"]*10.0 - fee_uw["center"]["sm11"] - fee_uw["gps"]["sm11"]
     old_lr_uw = old_claim_cost["sm11"]["cm19"]/(old_fee_uw["sm11"]*cfd["cm19"])
     new_lr_uw = new_claim_cost["sm11"]/(new_fee_uw["sm11"]*cfd["cm19"])
 
@@ -116,6 +257,7 @@ def caculateAfterMultipleConditions():
 
 
 def generateLR_UWList(n):
+    # centre all, add 5
     lr_uw_list = []
     curr_lr = []
     cost = []
@@ -174,9 +316,14 @@ def generateLR_UWList(n):
         
         lr_uw_list.append(0)
         lr_uw_list[num] = caculateLR_UW(num)    
+    
+    print("lr_uw_list = ",lr_uw_list)
     return lr_uw_list
 
-caculateAfterMultipleConditions()
+caculateAfterSingleConditions()
+caculateAfterSingleConditions_1()
 
-# res = generateLR_UWList(6)
-# print("res = ",res)
+caculateAfterMultipleConditions_0()
+caculateAfterMultipleConditions_1()
+
+res = generateLR_UWList(6)
