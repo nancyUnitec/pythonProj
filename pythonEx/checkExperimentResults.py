@@ -1,4 +1,10 @@
+# principle: use analytic system to get the summary data of overall
+# then query in google big query to get summary data of a specific class 
+# then caculate by overll - class or use some other formula 
 
+# 00007_check_claim_class_180621
+# 00008_check_cover_all_180621
+    
 def caculateAfterSingleConditions():
     sales = {}
 
@@ -46,10 +52,10 @@ def caculateAfterSingleConditions_1():
         new_fee_uw = {}
 
         sales["rate_period_36"] = {}
-        sales["rate_period_36"]["sm1"] = 4086
+        sales["rate_period_36"]["sm1"] = 4086  #comes in tensor demo table
 
         fee_uw["center"] = {}
-        fee_uw["center"]["sm11"] = 2403
+        fee_uw["center"]["sm11"] = 2403 #comes from big query
 
         fee_uw["all_1"] = 24467
 
