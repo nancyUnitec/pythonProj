@@ -289,7 +289,7 @@ def caculateAfterMultipleConditions_1():
     print("new_lr_uwwwwwwww = ",new_lr_uw)
 
 def caculateAfterMultipleConditions_1_NM():
-    # mp3 all price,DVD all price add 5 and 10 respectively
+    # mp3 price 200,DVD price to 700 add 5 and 10 respectively
     # center,200 and GPS 700 block
 
     if True:
@@ -306,57 +306,53 @@ def caculateAfterMultipleConditions_1_NM():
 
         # sales["all_21"] = 7712
         sales["rate_period_36"] = {}
-        sales["rate_period_36"]["sm1"] = 4086
+        sales["rate_period_36"]["sm11"] = 8770.0
 
         sales["mp3"] = {}
-        sales["mp3"]["sm11"] = 70
+        sales["mp3"]["sm11"] = 55.0
         sales["dvd"] = {}
-        sales["dvd"]["sm11"] = 457
-
-        # sales["dvd_22"] = 65
-        # sales["dvd_25"] = 42
-
-        # sales["gps_21"] = 405
-        # sales["center_22"] = 664
-
-        # fee_uw["mp3_25"] = 8460
+        sales["dvd"]["sm11"] = 2
 
         fee_uw["center"] = {}
-        fee_uw["center"]["sm11"] = 2403.75
+        fee_uw["center"]["sm11"] = 223.0
         fee_uw["gps"] = {}
-        fee_uw["gps"]["sm11"] = 273.75
+        fee_uw["gps"]["sm11"] = 18.0
 
-        # fee_uw["all_1"] = 24467
-
-        # fee_uw["all_22"] = 51791.25
-        # fee_uw["all_25"] = 89429.5
         fee_uw["rate_period_36"] = {}
-        fee_uw["rate_period_36"]["sm1"] = 24467
+        fee_uw["rate_period_36"]["sm11"] = 50.31
 
-        old_fee_uw["sm11"] = 38327.25
+        old_fee_uw["sm11"] = 53553.0
         # print("new_fee_uw_sm11",new_fee_uw["sm11"])
 
         #claim data
         claim_cost = {}
+        #center class id:41, rate id: f310e54f36299a42f3821128765eefc78ac8cb494df2175020e76da209dd1245
         claim_cost["center"] = {}
         claim_cost["center"]["sm11"] = {}
-        claim_cost["center"]["sm11"]["cm19"] = 202.62
+        claim_cost["center"]["sm11"]["cm14"] = 0.0
+        
+        #gps class id: 46, rate_id: 67a19b10ff69025e56ac7d7e0f5bfd3e7ac754720adc1aceed2e2d2307d3827d 
         claim_cost["gps"] = {}
         claim_cost["gps"]["sm11"] = {}
-        claim_cost["gps"]["sm11"]["cm19"] = 0
+        claim_cost["gps"]["sm11"]["cm14"] = 0.0
 
         old_claim_cost = {}
         old_claim_cost["sm11"] = {}
-        old_claim_cost["sm11"]["cm19"] = 7500.0
+        old_claim_cost["sm11"]["cm14"] = 3443.37
         new_claim_cost = {}
-        new_claim_cost["sm11"] = old_claim_cost["sm11"]["cm19"]-claim_cost["center"]["sm11"]["cm19"] - claim_cost["gps"]["sm11"]["cm19"]
+        # new_claim_cost["sm11"] = old_claim_cost["sm11"]["cm19"]-claim_cost["center"]["sm11"]["cm19"] - claim_cost["gps"]["sm11"]["cm19"]
+        new_claim_cost["sm11"] = old_claim_cost["sm11"]["cm14"]-claim_cost["center"]["sm11"]["cm14"] - claim_cost["gps"]["sm11"]["cm14"]
+        
         # print("new_claim_cost_sm11 = ",new_claim_cost["sm11"])
 
     # mp3,200,DVD,200 add 5 and 10 respectively
     # center,200 and GPS 700 block
-    new_fee_uw["sm11"] = old_fee_uw["sm11"]+sales["mp3"]["sm11"]*5.0+sales["dvd"]["sm11"]*10.0 - fee_uw["center"]["sm11"] - fee_uw["gps"]["sm11"]
-    old_lr_uw = old_claim_cost["sm11"]["cm19"]/(old_fee_uw["sm11"]*cfd["cm19"])
-    new_lr_uw = new_claim_cost["sm11"]/(new_fee_uw["sm11"]*cfd["cm19"])
+    new_fee_uw["sm11"] = old_fee_uw["sm11"]+sales["mp3"]["sm11"]*0.0+sales["dvd"]["sm11"]*0.0 - fee_uw["center"]["sm11"] - fee_uw["gps"]["sm11"]
+    # old_lr_uw = old_claim_cost["sm11"]["cm19"]/(old_fee_uw["sm11"]*cfd["cm19"])
+    # new_lr_uw = new_claim_cost["sm11"]/(new_fee_uw["sm11"]*cfd["cm19"])
+
+    old_lr_uw = old_claim_cost["sm11"]["cm14"]/(old_fee_uw["sm11"]*cfd["cm14"])
+    new_lr_uw = new_claim_cost["sm11"]/(new_fee_uw["sm11"]*cfd["cm14"])
 
     print("old_lr_uwwwwwwww = ",old_lr_uw)
     print("new_lr_uwwwwwwww = ",new_lr_uw)
@@ -453,10 +449,11 @@ def generateLR_UWList(n):
     return lr_uw_list
 
 # caculateAfterSingleConditions()
-caculateAfterSingleConditions_NM()
+# caculateAfterSingleConditions_NM()
 # caculateAfterSingleConditions_1()
 
 # caculateAfterMultipleConditions_0()
 # caculateAfterMultipleConditions_1()
+caculateAfterMultipleConditions_1_NM()
 
 # res = generateLR_UWList(6)
