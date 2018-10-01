@@ -484,32 +484,46 @@ def caculate_lr(claim_cost,sale_fee,cfd):
 
 
 all_old_claim_cost = {}
-all_old_claim_cost["sm11"] = {}
-all_old_claim_cost["sm11"]["cm9"] = 1.0
+all_old_claim_cost["sm201706"] = {}
+all_old_claim_cost["sm201706"]["cmP3"] = 14413.34
+
 product_old_claim_cost = {}
 product_old_claim_cost["class_cellphone"] = {}
-product_old_claim_cost["class_cellphone"]["sm11"] = {}
-product_old_claim_cost["class_cellphone"]["sm11"]["cm9"] = 0.3
+product_old_claim_cost["class_cellphone"]["sm201706"] = {}
+product_old_claim_cost["class_cellphone"]["sm201706"]["cmP3"] = 12017.28
+
 all_old_sale_fee = {}
-all_old_sale_fee["sm11"] = 5.0
+all_old_sale_fee["sm201706"] = 62098.18
+
 product_old_sale_fee = {}
 product_old_sale_fee["class_cellphone"] = {}
-product_old_sale_fee["class_cellphone"]["sm11"] = 2.0
-product_sale_count["class_cellphone"]["sm11"] = ???
-product_delta_price["class_cellphone"] = ???
-cfd["cm9"] = ???
+product_old_sale_fee["class_cellphone"]["sm201706"] = 43052.0
 
-temp_cost,temp_fee = block_one_product(all_old_claim_cost["sm11"]["cm9"],all_old_sale_fee["sm11"],product_old_claim_cost["class_cellphone"]["sm11"]["cm9"],product_old_sale_fee["class_cellphone"]["sm11"])
+product_sale_count = {}
+product_sale_count["class_cellphone"] = {}
+product_sale_count["class_cellphone"]["sm201706"] = 1060.0
+
+product_delta_price = {}
+product_delta_price["class_cellphone"] = {}
+product_delta_price["class_cellphone"] = 5.0
+
+cfd = {}
+cfd["cmP3"] = 0.135+0.145+0.115
+
+temp_cost,temp_fee = block_one_product(all_old_claim_cost["sm201706"]["cmP3"],all_old_sale_fee["sm201706"],product_old_claim_cost["class_cellphone"]["sm201706"]["cmP3"],product_old_sale_fee["class_cellphone"]["sm201706"])
 
 # def change_one_product(total_old_claim_cost,total_old_sale_fee,product_sale_count,delta_price):
 
 
-new_cost,new_fee = change_one_product(all_old_claim_cost["sm11"]["cm9"],all_old_sale_fee["sm11"],product_sale_count["class_cellphone"]["sm11"],product_delta_price["class_cellphone"])
+# new_cost,new_fee = change_one_product(all_old_claim_cost["sm201706"]["cmP3"],all_old_sale_fee["sm201706"],product_sale_count["class_cellphone"]["sm201706"],product_delta_price["class_cellphone"])
 
-print(new_cost)
-print(new_fee)
-old_lr = caculate_lr(all_old_claim_cost["sm11"]["cm9"], all_old_sale_fee["sm11"])
-new_lr = caculate_lr(new_cost,new_fee)
+old_lr = caculate_lr(all_old_claim_cost["sm201706"]["cmP3"], all_old_sale_fee["sm201706"],cfd["cmP3"])
+new_lr = caculate_lr(temp_cost,temp_fee,cfd["cmP3"])
+
+# print(new_cost)
+# print(new_fee)
+print(old_lr)
+print(new_lr)
 # module:
 # product["class_pt"]
 # input
