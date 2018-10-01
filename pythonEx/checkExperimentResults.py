@@ -314,24 +314,24 @@ def caculateAfterMultipleConditions_1_NM():
         sales["dvd"]["sm11"] = 2
 
         fee_uw["center"] = {}
-        fee_uw["center"]["sm11"] = 223.0
+        fee_uw["center"]["sm11"] = 494.0
         fee_uw["gps"] = {}
-        fee_uw["gps"]["sm11"] = 18.0
+        fee_uw["gps"]["sm11"] = 0.0
 
-        fee_uw["rate_period_36"] = {}
-        fee_uw["rate_period_36"]["sm11"] = 50.31
+        # fee_uw["rate_period_36"] = {}
+        # fee_uw["rate_period_36"]["sm11"] = 50.31
 
         old_fee_uw["sm11"] = 53553.0
         # print("new_fee_uw_sm11",new_fee_uw["sm11"])
 
         #claim data
         claim_cost = {}
-        #center class id:41, rate id: f310e54f36299a42f3821128765eefc78ac8cb494df2175020e76da209dd1245
+        #center class id:41, price_to:700, rate id: 67a19b10ff69025e56ac7d7e0f5bfd3e7ac754720adc1aceed2e2d2307d3827d
         claim_cost["center"] = {}
         claim_cost["center"]["sm11"] = {}
-        claim_cost["center"]["sm11"]["cm14"] = 0.0
+        claim_cost["center"]["sm11"]["cm14"] = 307.26
         
-        #gps class id: 46, rate_id: 67a19b10ff69025e56ac7d7e0f5bfd3e7ac754720adc1aceed2e2d2307d3827d 
+        #gps class id: 46, price_to:200,  rate_id: f310e54f36299a42f3821128765eefc78ac8cb494df2175020e76da209dd1245
         claim_cost["gps"] = {}
         claim_cost["gps"]["sm11"] = {}
         claim_cost["gps"]["sm11"]["cm14"] = 0.0
@@ -347,7 +347,12 @@ def caculateAfterMultipleConditions_1_NM():
 
     # mp3,200,DVD,200 add 5 and 10 respectively
     # center,200 and GPS 700 block
-    new_fee_uw["sm11"] = old_fee_uw["sm11"]+sales["mp3"]["sm11"]*0.0+sales["dvd"]["sm11"]*0.0 - fee_uw["center"]["sm11"] - fee_uw["gps"]["sm11"]
+    # new_fee_uw["sm11"] = old_fee_uw["sm11"]+sales["mp3"]["sm11"]*0.0+sales["dvd"]["sm11"]*0.0 - fee_uw["center"]["sm11"] - fee_uw["gps"]["sm11"]
+    
+    new_fee_uw["sm11"] = old_fee_uw["sm11"]+sales["mp3"]["sm11"]*50.0+sales["dvd"]["sm11"]*10.0 - fee_uw["center"]["sm11"] - fee_uw["gps"]["sm11"]
+    # new_fee_uw["sm11"] = old_fee_uw["sm11"]+sales["mp3"]["sm11"]*0.0+sales["dvd"]["sm11"]*0.0 - fee_uw["gps"]["sm11"]
+    
+
     # old_lr_uw = old_claim_cost["sm11"]["cm19"]/(old_fee_uw["sm11"]*cfd["cm19"])
     # new_lr_uw = new_claim_cost["sm11"]/(new_fee_uw["sm11"]*cfd["cm19"])
 
